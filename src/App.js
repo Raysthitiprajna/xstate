@@ -30,10 +30,10 @@ function App() {
   useEffect(() =>{
     if(selectedCountry){
 
-      setSelectedState("");
-      setSelectedCity("");
-      setCities([]);
-      setStates([]);
+      // setSelectedState("");
+      // setSelectedCity("");
+      // setCities([]);
+      // setStates([]);
       fetch(`https://location-selector.labs.crio.do/country=${selectedCountry}/states`)
       .then((res) =>{
          if(!res.ok) throw new Error ("State API Faileed") 
@@ -47,12 +47,15 @@ function App() {
          setStates([]);
          }
         })
-      .catch((err) =>{
-        console.error("Errorfetching states",err)
-          setStates([]);
+      .catch((err) =>
+        console.error("Errorfetching states",err));
+          setSelectedState("");
+          setCities([]);
+          setSelectedCity("")
+
           
         // setState([]);
-      });
+      
       
     }
   },[selectedCountry]);
@@ -72,11 +75,11 @@ function App() {
          setCities([]);
       }
     })
-    .catch((err) =>{
-      console.error("Error fetching cities",err);
-      setCities([]);
-    });
-    setSelectedCity("");
+    .catch((err) =>
+      console.error("Error fetching cities",err));
+      setSelectedCity("");
+    ;
+    
   }
 
     },[selectedState,selectedCountry])
