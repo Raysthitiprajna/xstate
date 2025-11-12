@@ -36,16 +36,14 @@ function App() {
       // setStates([]);
       fetch(`https://location-selector.labs.crio.do/country=${selectedCountry}/states`)
       .then((res) =>{
-         if(!res.ok) throw new Error ("State API Faileed") 
+        //  if(!res.ok) throw new Error ("State API Faileed") 
          return res.json()
       // .then((data) =>setState(data))
 })
       .then((data) =>{
-         if(Array.isArray(data)) {
+         
           setStates(data)
-         }else{
-         setStates([]);
-         }
+         
         })
       .catch((err) =>
         console.error("Errorfetching states",err));
@@ -66,23 +64,19 @@ function App() {
     .then((res) =>
       // if(!res.ok) throw new Error ("City  API Failed")
          res.json())
-    .then((data) => {
-      if(Array.isArray(data)){
-        setCities(data);
-      }else{
-       
-        console.log("Unexpected city data format",data);
-         setCities([]);
-      }
-    })
-    .catch((err) =>
-      console.error("Error fetching cities",err));
-      setSelectedCity("");
-    ;
+    .then((data) => 
+      
+        setCities(data))
+      
     
-  }
+    .catch((err) =>
+      console.error("Error fetching cities",err))
+      setSelectedCity("");
 
-    },[selectedState,selectedCountry])
+    
+}
+
+    },[selectedState,selectedCountry]);
   
 
   return (
