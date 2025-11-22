@@ -12,7 +12,7 @@ function App() {
   const[selectedCity,setSelectedCity] =useState("");
 
   useEffect(() =>{
-    fetch("https://location-selector.labs.crio.do/countries")
+    fetch("https://crio-location-selector.onrender.com/countries")
     .then((res) => 
       // if(!res.ok) throw new Error ("Country API Failed");
       res.json())
@@ -22,19 +22,14 @@ function App() {
       // if(Array.isArray(data))
          setCountries(data))
       // else setCountry([])
-    .catch((err) => {console.error("Error fetching countries",err);
-    // setCountry([]);
-  }); 
+    .catch((err) => console.error("Error fetching countries",err));
+    // setCountry([])); 
   },[]);
 
   useEffect(() =>{
     if(selectedCountry){
 
-      // setSelectedState("");
-      // setSelectedCity("");
-      // setCities([]);
-      // setStates([]);
-      fetch(`https://location-selector.labs.crio.do/country=${selectedCountry}/states`)
+      fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/states`)
       .then((res) =>{
         //  if(!res.ok) throw new Error ("State API Faileed") 
          return res.json()
@@ -60,7 +55,7 @@ function App() {
 
   useEffect(()=>{
     if(selectedState && selectedCountry){
-    fetch(`https://location-selector.labs.crio.do/country=${selectedCountry}/state=${selectedState}/cities`)
+    fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`)
     .then((res) =>
       // if(!res.ok) throw new Error ("City  API Failed")
          res.json())
@@ -70,7 +65,7 @@ function App() {
       
     
     .catch((err) =>
-      console.error("Error fetching cities",err))
+      console.error("Error fetching cities",err));
       setSelectedCity("");
 
     
